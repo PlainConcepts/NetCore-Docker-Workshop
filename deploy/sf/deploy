@@ -1,0 +1,10 @@
+#!/bin/bash
+echo "Starting Service Fabric deployment..."
+
+echo "Creating Azure Resource Group: $1 ..."
+az group create -l westus -n $1
+
+echo "Creating Service Fabric Resource: $1 ..."
+az group deployment create --resource-group $1 --parameters $2.parameters.json --template-file $2.json
+
+echo "Deployment finished!"
