@@ -38,6 +38,10 @@ namespace Master
             {
                 app.UseDeveloperExceptionPage();
             }
+            
+            if (!string.IsNullOrEmpty(Configuration["PATH_BASE"])) {
+                app.UsePathBase(Configuration["PATH_BASE"]);
+            }
 
             app.UseMvc();
         }

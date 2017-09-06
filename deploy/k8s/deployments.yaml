@@ -1,0 +1,48 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: master
+spec:
+  paused: true
+  template:
+    metadata:
+      labels:
+        app: myapp
+        component: master
+    spec:
+      containers:
+      - name: basket
+        image: pcdockerws/master
+        imagePullPolicy: Always
+        env:
+        - name: PATH_BASE
+          value: /master-api
+        - name: MasterSettings__SlaveUri
+          valueFrom:
+           configMapKeyRef:
+             name: externalcfg
+             key: MasterSettings__SlaveUri
+        ports:
+        - containerPort: 80      
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: slave
+spec:
+  paused: true
+  template:
+    metadata:
+      labels:
+        app: myapp
+        component: slave
+    spec:
+      containers:
+      - name: slave
+        image: pcdockerws/slave
+        imagePullPolicy: Always
+        env:
+        - name: PATH_BASE
+          value: /slave-api
+        ports:
+        - containerPort: 80
