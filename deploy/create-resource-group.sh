@@ -1,0 +1,1 @@
+az group create --location westus --name $1
