@@ -8,6 +8,7 @@ using Microsoft.Extensions.Options;
 using Master.Services;
 using System.Threading;
 using System.Net.Http;
+using System.Text;
 
 namespace Master.Controllers
 {
@@ -28,6 +29,11 @@ namespace Master.Controllers
         public async Task<IActionResult> Get()
         {
             var slaveMessage = await GetSlaveResponse();
+
+            // Triggers the azure function by posting an 
+            // http call once the Slave has answered
+            await TriggerAzureFunction(_guid.ToString());
+
             return Ok(new {
                 Message = $"Hello Lord! I am your Master {_guid} running on {Environment.MachineName}",
                 SlaveMessage = slaveMessage
@@ -48,6 +54,20 @@ namespace Master.Controllers
             }
             catch (Exception ex) {
                 return $"Error {ex.GetType().Name} ('{ex.Message}') in slave that is in {_cfg.SlaveUri}";
+            }
+        }
+
+        private async Task TriggerAzureFunction(string slaveName)
+        {
+            var body = new {
+                name= slaveName
+            };
+            var content = new StringContent(body.ToString(), Encoding.UTF8, "application/json");
+
+            using (var client = new HttpClient())
+            {
+                var response = await client.PostAsync($"{_cfg.AFUri}", content);
+                response.EnsureSuccessStatusCode();
             }
         }
     }

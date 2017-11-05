@@ -7,7 +7,11 @@ namespace FunctionAppDemo
     public static class QueueTriggerFunction
     {
         [FunctionName("QueueTriggerFunction")]
-        public static void Run([QueueTrigger("myqueue-items", Connection = "")]CustomQueueMessage myQueueItem, DateTimeOffset insertionTime, out object documentdb, TraceWriter log)
+        public static void Run(
+            [QueueTrigger("outqueue", Connection = "AzureWebJobsDashboard")]CustomQueueMessage myQueueItem, 
+            DateTimeOffset insertionTime,
+            [DocumentDB("outDatabase", "MyCollection", ConnectionStringSetting = "functionsdemo_DOCUMENTDB")] out dynamic documentdb, 
+            TraceWriter log)
         {
             log.Info($"C# Queue trigger function processed: {myQueueItem.Name} inserted at {insertionTime}");
 

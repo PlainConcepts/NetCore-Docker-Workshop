@@ -11,7 +11,10 @@ namespace FunctionAppDemo
     public static class HttpTriggerFunction
     {
         [FunctionName("HttpTriggerFunction")]
-        public static async Task<HttpResponseMessage> Run([HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)]HttpRequestMessage req, IAsyncCollector<CustomQueueMessage> myQueueItem, TraceWriter log)
+        public static async Task<HttpResponseMessage> Run(
+            [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)]HttpRequestMessage req, 
+            [Queue("outqueue", Connection = "AzureWebJobsDashboard")] IAsyncCollector<CustomQueueMessage> myQueueItem, 
+            TraceWriter log)
         {
             log.Info("C# HTTP trigger function processed a request.");
 
