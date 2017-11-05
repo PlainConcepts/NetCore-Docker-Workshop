@@ -1,15 +1,14 @@
-version: '2.1'
+version: '3'
 
 services:
-
   master:
-    image: pcdockerws/master:${TAG:-latest}
+    image: master
     build:
       context: ./Master
-      dockerfile: Dockerfile    
+      dockerfile: Dockerfile
 
   slave:
-    image: pcdockerws/slave:${TAG:-latest}
+    image: slave
     build:
       context: ./Slave
-      dockerfile: Dockerfile    
+      dockerfile: Dockerfile

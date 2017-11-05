@@ -9,6 +9,7 @@ using Master.Services;
 using System.Threading;
 using System.Net.Http;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace Master.Controllers
 {
@@ -59,14 +60,12 @@ namespace Master.Controllers
 
         private async Task TriggerAzureFunction(string slaveName)
         {
-            var body = new {
-                name= slaveName
-            };
-            var content = new StringContent(body.ToString(), Encoding.UTF8, "application/json");
+            var payload = JsonConvert.SerializeObject(new { name = slaveName });
+             var content = new StringContent(payload, Encoding.UTF8, "application/json");
 
             using (var client = new HttpClient())
             {
-                var response = await client.PostAsync($"{_cfg.AFUri}", content);
+                var response = await client.PostAsync(_cfg.AFUri, content);
                 response.EnsureSuccessStatusCode();
             }
         }
