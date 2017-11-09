@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Slave.Services;
+using Slave.Infrastructure.Middlewares;
 
 namespace Slave
 {
@@ -35,6 +36,11 @@ namespace Slave
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseFailingMiddleware(options =>
+            {
+                options.ConfigPath = "/Failing";
+            });
 
             app.UseMvc();
         }
