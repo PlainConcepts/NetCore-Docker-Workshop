@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.Extensions.HealthChecks;
 
 namespace Master
 {
@@ -28,6 +29,11 @@ namespace Master
             services.AddSingleton<GuidProvider>();
             services.AddOptions();
             services.Configure<MySettings>(Configuration.GetSection("MasterSettings"));
+            services.AddHealthChecks(checks =>
+            {
+                // Cache to zero only for demo/testing purposes, do not put zero otherwise
+                checks.AddUrlCheck($"{Configuration["MasterSettings:SlaveUri"]}/hc", TimeSpan.Zero);
+            });
             services.AddMvc();
         }
 
