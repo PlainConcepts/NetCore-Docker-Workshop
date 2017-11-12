@@ -45,10 +45,10 @@ namespace Slave
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseFailingMiddleware(options =>
-            {
-                options.ConfigPath = "/Failing";
-            });
+            //app.UseFailingMiddleware(options =>
+            //{
+            //    options.ConfigPath = "/Failing";
+            //});
 
             app.UseMvc();
         }
