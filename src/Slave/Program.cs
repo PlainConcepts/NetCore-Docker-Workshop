@@ -7,6 +7,7 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Slave.Infrastructure.Middlewares;
 
 namespace Slave
 {
@@ -19,7 +20,12 @@ namespace Slave
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .UseFailing(options =>
+                {
+                    options.ConfigPath = "/Failing";
+                })
                 .UseStartup<Startup>()
+                .UseHealthChecks("/hc")
                 .Build();
     }
 }

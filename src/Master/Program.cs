@@ -20,6 +20,7 @@ namespace Master
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
+                .UseHealthChecks("/hc")
                 .Build();
     }
 }
