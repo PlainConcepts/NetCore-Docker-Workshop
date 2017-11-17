@@ -1,7 +1,7 @@
 # Managing our containerized applications through docker compose
 In this section we will use docker compose tool to create and run our images for our sample project. We will see how docker compose is much more convenient that Docker command tool when we have more than one image to manage.
 
-**We must start from the code in the branch 2-dockerfiles**. This code contains the Docker files for Master and Slave applications.
+**We must start from the code in the branch 2-dockerfiles**. This code already contains the Docker files for Master and Slave applications.
 
 ## Pre-requisite: docker compose
 Apart of the Docker command tool, you must have the Docker compose tool installed to follow this section. Depending on the platform you are using, the installation of Docker will have already installed docker compose as well. To check it you can just execute `docker compose` in a comand prompt. In case it is not installed, install it from the [compose section in the Docker web page](https://docs.docker.com/compose/).
@@ -13,7 +13,7 @@ Apart of the Docker command tool, you must have the Docker compose tool installe
 > dotnet build
 > dotnet publish -c Release  -o obj/Docker/publish 
 ```
-With the publish command we move to the folder `src/Master/obj/Docker/publish` the application and its dependencies prepared to be deployed. This is the place set in our Dockerfile to search for the reosurces that will be copied when the Master image is created. Here the Dockerfile:
+The publish command packs the application and its dependencies into a folder for deployment. In this case the deployment content is copied to the folder `src/Master/obj/Docker/publish`. This is the place set in our Dockerfile to get the reosurces that will be copied when the Master image is created. Here the Dockerfile:
 
 ```
 FROM microsoft/aspnetcore:2.0
@@ -23,7 +23,7 @@ EXPOSE 80
 COPY ${source:-obj/Docker/publish} .
 ENTRYPOINT ["dotnet", "Master.dll"]
 ``` 
-2. Repeat the previous step for the Slave folder. The result must be that the Slave-dll and the rest of files to be deployed are in the folder `src/Slave/obj/Docker/publish`
+2. Repeat the previous step (build and publish) for the Slave folder. The result should be that the Slave.dll and the rest of files to be deployed are copied into the folder `src/Slave/obj/Docker/publish`
 
 ## Creating our images from docker compose
 1. In the 'src' folder where we have the folders for our applications Master and Slave, create a new file named 'docker-compose.yml'
@@ -48,12 +48,12 @@ services:
 ``` 
 
 We have in this code the next parts:
-- version: the version of the language. Different versions allows different tags for instance.
+- version: the version of the config language. Different versions allows different tags for instance.
 - services: defines the different services (images) in a list
-  - master/slave: names for our services in the yml files. We must reference a service by its name.
-    - image: determines the name of the image when created, plus repository and tags if desired.
+  - master/slave: names for our services in the yml files. We must reference a service in the yml file by this name.
+    - image: determines the name of the image when created, plus repository and tags if desired in format `{repository}/{imgage}:{label}`.
     - build: if present, determines that the image will be build. If not present, the image will be pulled from the container repository.
-      - context: Sets the base path where to start the build.
+      - context: Sets the base path where to start the build. In this case the folder where there is the Dockerfile file.
       - dockerfile: the name of the Docker file to use for the building of the image.
 
 3. Once the configuration file is created, we can execute `docker-compose` from the `src` folder to build the images and run containers:
@@ -65,10 +65,10 @@ If we want to build the images but not start any containers, we execute a build 
 > docker-compose build
 ```
 
-Once the command has finished, check that the images has been created with `docker images` and the containers running with `docker ps`. Note that this containers do not have the external port since we have not defined one. This implies that the applications will not receive our requests. We will open the external ports in the next step.
+Once the command has finished, check that the images has been created executing in the command prompt or shell `docker images`. To see the the containers running list execute `docker ps`. Note that this containers do not have the external port since we have not defined one. This implies that the applications will not receive our requests. We will open the external ports in the next step.
 
 ## Extending the base configuration
-By convention the `docker-compose.yml` file contains the base configuration of our services. As a good practice, we extend this configuration adding more files that overrides the values of the precedent ones. By default the docker-compose command reads the files `docker-compose.yml` and `docker-compose.override.yml`. The override file is used to override vslues of the base configuration and extend it. If configuration files with other names are required (f.i. we can create one file `docker-compose.prod.yml` with production configuration) we need to specify them explicitly using the `-f` parameter, as in this example:
+By convention the `docker-compose.yml` file contains the base configuration of our services. As a good practice, we extend this configuration adding more files that overrides the values of the precedent ones. By default the docker-compose command reads the files `docker-compose.yml` and `docker-compose.override.yml`. The override file is used to override values of the base configuration and extend it. If configuration files with other names are required (f.i. we can create one file `docker-compose.prod.yml` with production configuration) we need to specify them explicitly using the `-f` parameter, as in this example:
 
 ```
 docker-compose -f docker-compose.yml -f docker-compose.prod.yml up
@@ -97,10 +97,10 @@ services:
 ```
 
 Here we have some tags already seen in the docker-compose file. We are adding here some extra tags:
-- environment: under this tag we put the list of environment variables set. 
+- environment: under this tag we put the list of environment variables set under a structure of `{key}={value}`. 
 - ports:  define the ports to open with a mapping between the Docker host net and the container net. For instance for the master service the external port is the 5000 and will connect to the port 80 of the container (internal port).
 
-Yo can see how we reference the service addresses by the name of the service. In the case of the address for Slave we put http://slave and Docker will manage the names redirecting to the proper IPs and ports.
+Yo can see how we reference the addresses by the name of the service. In the case of the address for Slave we put http://slave and Docker will manage the names redirecting to the proper IPs and ports.
 
 3. Start the containers with the modified configuration as before:
 ```
