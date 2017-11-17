@@ -1,7 +1,7 @@
 # Adding HealthChecks to Master and Slave services
-In this section we will add the HealthChecks library implemented by the AspNet team. You can use for instance the branch `6-docker-machine`. At the end of this section we will have a similar health check code to the branch `7-resilience`. First we have to install the NuGet package Microsoft.AspNetCore.HealthChecks in both Slave and Master projects.
+In this section we will add the HealthChecks library implemented by the AspNet team. You can use for instance the branch `6-docker-machine`. At the end of this section we will have a similar health check code to the one in the branch `7-resilience`. First we have to install the NuGet package Microsoft.AspNetCore.HealthChecks in both Slave and Master projects.
 ## Slave project
-For the Slave project we need to ensure that the service is up and running. You need to add a simple enspoint that answers an OK status. Follow the ext steps:
+For the Slave project we need to ensure that the service is up and running. You can add a simple endpoint that answers an OK status if the application is running. Follow the next steps:
 1. Add in the Program.cs the extension method `UseHealthChecks("string path")` to create the endpoint for the HealthChecks monitoring:
 
 ```C#
@@ -12,7 +12,7 @@ public static IWebHost BuildWebHost(string[] args) =>
         .Build();
 ```
 
-2. Once we have created the endpoint, we configure the checks that we need to ensure that the service is up and running. Since Slave has no other dependencies ans it is a very simple service, we can just send an OK status. We add the configuration of the health checks to the `ConfigureServices()` method:
+2. Once we have created the endpoint, we configure the checks needed to ensure that the service is up and running. Since Slave has no other dependencies and it is a very simple service, we can just send an OK status. We add the configuration of the health check to the `ConfigureServices()` method:
 
 ```C#
 public void ConfigureServices(IServiceCollection services)
@@ -62,7 +62,7 @@ public void ConfigureServices(IServiceCollection services)
     services.AddMvc();
 }
 ```
-As you ca see we use an extension method, 'AddUrlCheck' to test the health check end point of the slave service.
+As you ca see we use an extension method, 'AddUrlCheck' to test the health check end point of the slave service, that we have set to `/hc` in the step 1.
 
 3. Run the projects, open the browser and go to `http://localhost:5000/hc`. You should see the response of the Health Check monitoring service, in this case 'Healthy':
 
