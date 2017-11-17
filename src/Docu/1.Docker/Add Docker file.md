@@ -17,8 +17,6 @@ src\Master> dotnet build
 ```
 At this point we must ahve the dll build under the folder `bin\Debug\netcoreapp2.0`
 
-TODO: añadir un ejemplo de como crear una imagen de docker con docker file simplemente vía el fichero y ya está (ej: instalar desde docker file un servidor web y añadir alguna opcion y ya está).
-
 ## 'Dockerizing' our application 
 Follow the next steps:
 1. Create a file named Docker without extension in the Master folder.
