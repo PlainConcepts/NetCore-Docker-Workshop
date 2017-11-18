@@ -6,14 +6,14 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Azure.WebJobs.Host;
 
-namespace FunctionAppDemo
+namespace SageFunctionApp
 {
     public static class HttpTriggerFunction
     {
         [FunctionName("HttpTriggerFunction")]
         public static async Task<HttpResponseMessage> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)]HttpRequestMessage req, 
-            [Queue("outqueue", Connection = "AzureWebJobsDashboard")] IAsyncCollector<CustomQueueMessage> myQueueItem, 
+            [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)]HttpRequestMessage req,
+            [Queue("outqueue", Connection = "AzureWebJobsDashboard")] IAsyncCollector<CustomQueueMessage> myQueueItem,
             TraceWriter log)
         {
             log.Info("C# HTTP trigger function processed a request.");

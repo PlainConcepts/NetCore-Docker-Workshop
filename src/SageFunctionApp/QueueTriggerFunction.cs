@@ -2,15 +2,15 @@ using System;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Host;
 
-namespace FunctionAppDemo
+namespace SageFunctionApp
 {
     public static class QueueTriggerFunction
     {
         [FunctionName("QueueTriggerFunction")]
         public static void Run(
-            [QueueTrigger("outqueue", Connection = "AzureWebJobsDashboard")]CustomQueueMessage myQueueItem, 
+            [QueueTrigger("outqueue", Connection = "AzureWebJobsDashboard")]CustomQueueMessage myQueueItem,
             DateTimeOffset insertionTime,
-            [DocumentDB("outDatabase", "MyCollection", ConnectionStringSetting = "functionsdemo_DOCUMENTDB")] out dynamic documentdb, 
+            [DocumentDB("outDatabase", "MyCollection", ConnectionStringSetting = "functionsdemo_DOCUMENTDB")] out dynamic documentdb,
             TraceWriter log)
         {
             log.Info($"C# Queue trigger function processed: {myQueueItem.Name} inserted at {insertionTime}");
