@@ -12,7 +12,7 @@ spec:
     spec:
       containers:
       - name: basket
-        image: pcdockerws/master
+        image: ramontc/master
         imagePullPolicy: Always
         env:
         - name: PATH_BASE
@@ -53,7 +53,7 @@ spec:
     spec:
       containers:
       - name: slave
-        image: pcdockerws/slave
+        image: ramontc/slave
         imagePullPolicy: Always
         env:
         - name: PATH_BASE

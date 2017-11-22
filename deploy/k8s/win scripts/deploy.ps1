@@ -16,7 +16,7 @@ kubectl create -f services.yaml -f frontend.yaml
 if ([string]::IsNullOrEmpty($externalDns)) {
         Write-Host "Waiting for frontend's external ip..." -ForegroundColor Yellow
         while ($true) {
-            $frontendUrl = & ExecKube -cmd 'get svc frontend -o=jsonpath="{.status.loadBalancer.ingress[0].ip}"'
+            $frontendUrl = kubectl get svc frontend -o=jsonpath="{.status.loadBalancer.ingress[0].ip}"
             if ([bool]($frontendUrl -as [ipaddress])) {
                 break
             }
@@ -37,5 +37,5 @@ Write-Host "Execute rollout.."
 kubectl rollout resume deployments/master
 kubectl rollout resume deployments/slave
 
-Write-Host "Master API is exposed at http://$($externalDns):5000, Slave API at http://$($externalDns):5001" -ForegroundColor Yellow
+Write-Host "Master API is exposed at http://$($externalDns)/master-api/, Slave API at http://$($externalDns)/slave-api/" -ForegroundColor Yellow
 

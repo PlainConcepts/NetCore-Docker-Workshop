@@ -4,7 +4,7 @@
     [parameter(Mandatory=$false)][string]$registryName,
     [parameter(Mandatory=$true)][string]$orchestratorName,
     [parameter(Mandatory=$true)][string]$dnsName,
-    [parameter(Mandatory=$true)][string]$createAcr=$true,
+    [parameter(Mandatory=$false)][string]$createAcr=$false,
     [parameter(Mandatory=$false)][int]$agentCount=2,
     [parameter(Mandatory=$false)][string]$agentVMSize="Standard_D2_v2",
     [parameter(Mandatory=$false)][int]$masterCount=1
