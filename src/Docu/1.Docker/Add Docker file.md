@@ -19,7 +19,7 @@ At this point we must ahve the dll build under the folder `bin\Debug\netcoreapp2
 
 ## 'Dockerizing' our application 
 Follow the next steps:
-1. Create a file named Docker without extension in the Master folder.
+1. Create a file named Dockerfile without extension in the Master folder.
 2. Open the file with a text editor and add this configuration:
 ```
 FROM microsoft/aspnetcore
