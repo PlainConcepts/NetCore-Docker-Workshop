@@ -31,11 +31,8 @@ namespace Master.Controllers
         {
             var slaveMessage = await GetSlaveResponse();
 
-            // Triggers the azure function by posting an 
-            // http call once the Slave has answered
-            await TriggerAzureFunction(_guid.ToString());
-
-            return Ok(new {
+            return Ok(new
+            {
                 Message = $"Hello Lord! I am your Master {_guid} running on {Environment.MachineName}",
                 SlaveMessage = slaveMessage
             });
@@ -43,30 +40,22 @@ namespace Master.Controllers
 
         private async Task<string> GetSlaveResponse()
         {
-            try {
-                using (var client = new HttpClient()) {
+            try
+            {
+                using (var client = new HttpClient())
+                {
                     var response = await client.GetAsync($"{_cfg.SlaveUri}/api/identification");
-                    if (response.IsSuccessStatusCode) {
+                    if (response.IsSuccessStatusCode)
+                    {
                         return await response.Content.ReadAsStringAsync();
                     }
 
                     return $"Slave in {_cfg.SlaveUri} refuses to identify with {response.StatusCode}";
                 }
             }
-            catch (Exception ex) {
-                return $"Error {ex.GetType().Name} ('{ex.Message}') in slave that is in {_cfg.SlaveUri}";
-            }
-        }
-
-        private async Task TriggerAzureFunction(string slaveName)
-        {
-            var payload = JsonConvert.SerializeObject(new { name = slaveName });
-             var content = new StringContent(payload, Encoding.UTF8, "application/json");
-
-            using (var client = new HttpClient())
+            catch (Exception ex)
             {
-                var response = await client.PostAsync(_cfg.AFUri, content);
-                response.EnsureSuccessStatusCode();
+                return $"Error {ex.GetType().Name} ('{ex.Message}') in slave that is in {_cfg.SlaveUri}";
             }
         }
     }
