@@ -28,7 +28,7 @@ EXPOSE 80
 COPY bin/Debug/netcoreapp2.0 .
 ENTRYPOINT ["dotnet", "Master.dll"]
 ``` 
-3. From the command line execute 
+3. From the command line execute the next command (**Do not forget to include the '.' at the end, which indicates that the current folder contains the Dockerfile**) 
 ```
 > docker build -t="dockerworkshop/master:manual" .  
 ```
