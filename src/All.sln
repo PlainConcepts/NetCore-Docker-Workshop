@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2006
+VisualStudioVersion = 15.0.27130.2003
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Master", "Master\Master.csproj", "{1B5B4241-0AA9-49E7-88ED-F95D05B13F65}"
 EndProject
@@ -8,7 +8,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Slave", "Slave\Slave.csproj
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{DE061DF3-72D6-42EA-84AD-3C05637B2BDA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SageFunctionApp", "SageFunctionApp\SageFunctionApp.csproj", "{7B00DB41-B98A-4302-9FA9-A65A89790236}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FunctionApp", "FunctionApp\FunctionApp.csproj", "{8F29123A-24B3-40E3-8E66-D130D1407A76}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -56,18 +56,18 @@ Global
 		{DE061DF3-72D6-42EA-84AD-3C05637B2BDA}.Release|x64.Build.0 = Release|Any CPU
 		{DE061DF3-72D6-42EA-84AD-3C05637B2BDA}.Release|x86.ActiveCfg = Release|Any CPU
 		{DE061DF3-72D6-42EA-84AD-3C05637B2BDA}.Release|x86.Build.0 = Release|Any CPU
-		{7B00DB41-B98A-4302-9FA9-A65A89790236}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7B00DB41-B98A-4302-9FA9-A65A89790236}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7B00DB41-B98A-4302-9FA9-A65A89790236}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{7B00DB41-B98A-4302-9FA9-A65A89790236}.Debug|x64.Build.0 = Debug|Any CPU
-		{7B00DB41-B98A-4302-9FA9-A65A89790236}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{7B00DB41-B98A-4302-9FA9-A65A89790236}.Debug|x86.Build.0 = Debug|Any CPU
-		{7B00DB41-B98A-4302-9FA9-A65A89790236}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7B00DB41-B98A-4302-9FA9-A65A89790236}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7B00DB41-B98A-4302-9FA9-A65A89790236}.Release|x64.ActiveCfg = Release|Any CPU
-		{7B00DB41-B98A-4302-9FA9-A65A89790236}.Release|x64.Build.0 = Release|Any CPU
-		{7B00DB41-B98A-4302-9FA9-A65A89790236}.Release|x86.ActiveCfg = Release|Any CPU
-		{7B00DB41-B98A-4302-9FA9-A65A89790236}.Release|x86.Build.0 = Release|Any CPU
+		{8F29123A-24B3-40E3-8E66-D130D1407A76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F29123A-24B3-40E3-8E66-D130D1407A76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F29123A-24B3-40E3-8E66-D130D1407A76}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{8F29123A-24B3-40E3-8E66-D130D1407A76}.Debug|x64.Build.0 = Debug|Any CPU
+		{8F29123A-24B3-40E3-8E66-D130D1407A76}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8F29123A-24B3-40E3-8E66-D130D1407A76}.Debug|x86.Build.0 = Debug|Any CPU
+		{8F29123A-24B3-40E3-8E66-D130D1407A76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F29123A-24B3-40E3-8E66-D130D1407A76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F29123A-24B3-40E3-8E66-D130D1407A76}.Release|x64.ActiveCfg = Release|Any CPU
+		{8F29123A-24B3-40E3-8E66-D130D1407A76}.Release|x64.Build.0 = Release|Any CPU
+		{8F29123A-24B3-40E3-8E66-D130D1407A76}.Release|x86.ActiveCfg = Release|Any CPU
+		{8F29123A-24B3-40E3-8E66-D130D1407A76}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
