@@ -44,13 +44,13 @@ The `-d` parameter allows to run the container in detached mode. Otherwise the s
 
 To see the containers running in your Docker host you can run `docker ps -a`. The '-a' allows you to see all the containers, not only the running ones. The container must be up and running:
 
-![docker ps -a](./img/docker_ps_a.PNG)
+![docker ps -a](https://github.com/PlainConcepts/NetCore-Docker-Workshop/blob/1-start/src/Docu/1.Docker/Img/docker_ps_a.PNG)
 
 Here we see that the internal port is the 80, which is the one that we have set, and externally a rando port has been asigned, in this case the port 32768.
 
 6. Open a browser and write the uri to call our service, which is `http://localhost:#external_port#/api/greetings`. The port is the one that was assigned to our container, in the case of this example the 32768. We can see then the answer from the api:
 
-![browser get master](./img/browser_get_Master.PNG)
+![browser get master](https://github.com/PlainConcepts/NetCore-Docker-Workshop/blob/1-start/src/Docu/1.Docker/Img/browser_get_Master.PNG)
 
 In the response message we see an exception. This is because the Slave application is not running, and our Master application cannot reach it. 
 
@@ -61,7 +61,7 @@ In the response message we see an exception. This is because the Slave applicati
 ```
 Now if we do `docker ps` we will see two containers, the one with the random port and another one, the new one, with the port 5050. If we run it in the browser it should show the same json response as the previous one.
 
-![browser get master](./img/browser_get_5050_Master.PNG)
+![browser get master](https://github.com/PlainConcepts/NetCore-Docker-Workshop/blob/1-start/src/Docu/1.Docker/Img/browser_get_5050_Master.PNG)
 
 8. (Optional) In order to see the logs of the application you can do:
 ```
@@ -70,7 +70,7 @@ Now if we do `docker ps` we will see two containers, the one with the random por
 
 You can open as well a shell to the container with the command `docker exec -ti <container_id> bash` (if the container is Windows based, put powersehll instead of bash). With a ls we can see that the 'COPY' tag in the Dockerfile worked as expected:
 
- ![docker exec bash](./img/docker_exec_bash.PNG)
+ ![docker exec bash](https://github.com/PlainConcepts/NetCore-Docker-Workshop/blob/1-start/src/Docu/1.Docker/Img/docker_exec_bash.PNG)
 
  Note that to identify one container we do not need to write the whole id (2f9649994898), but only the first numbers (2f96).
 
