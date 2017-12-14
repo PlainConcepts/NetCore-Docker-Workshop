@@ -118,7 +118,51 @@ Here some helpful commands to manage your images and containers. You can see the
 
 ## Creating an image from the Slave application
 
-Repeat the same process for the project Slave. At the end you must have the 2 images generated, Master and Slave. One last step for connecting the 2 services is to configure for the Master application the URI for the slave. This is set by a parameter. With Docker the parameters are configured by environment variables. We can set the environment variable for a container through the parameter -e when creating the container. 
+Repeat the same process for the project Slave. At the end you must have the 2 images generated, Master and Slave. To check if the Slave is up and running you can go to the browser and write `http://localhost:#external_port#/api/identification`
+
+![browser get slave](https://github.com/PlainConcepts/NetCore-Docker-Workshop/blob/1-start/src/Docu/1.Docker/Img/browser_get_slave.PNG)
+
+One last step for connecting the 2 services is to configure for the Master application the URI for the slave. This is set by a parameter. With Docker the parameters are configured by environment variables. We can set the environment variable for a container through the parameter -e when creating the container.
+
 ```
-> docker run -d -p 5050:80 -e "MasterSettings__SlaveUri=http://slave:<slave_port>/api/identification" --name slave1 dockerworkshop/slave:manual
+> docker run -d -p 5050:80 -e "MasterSettings__SlaveUri=http://<slave_ip>:80" --name master1 dockerworkshop/master:manual
 ```
+
+The port for the parameter is the 80 because now we are inside the docker host network, and there the port exposed by our container is the 80. The external port is only to external connections. To get the slave IP we have two options, get it directly from the container, or use a DNS and call the container by its name instead of by their IP.
+
+### Obtain the IP for the slave 
+
+We can check the IP for a container with `docker inspect <container_Id>`. The inspect gives us information about the container, including its IP
+
+```
+(...)
+
+ "NetworkID": "5b6a1be53184caf9bb80bd3bcb4ed2032caaef6d7b1c757f56c8dc743eaab0fd",
+ "EndpointID": "5670923c7247d0625bfb36fac106441f6785ff2041742afd80a7fc56c80d6118",
+ "Gateway": "172.19.0.1",
+ "IPAddress": "172.19.0.3",
+ "IPPrefixLen": 16,
+
+(...)
+```
+In this case the ip for slave is '172.19.0.3', so we would execute `docker run -d -p 5050:80 -e "MasterSettings__SlaveUri=http://172.19.0.3:80" --name master1 dockerworkshop/master:manual`
+
+Now if we call master from the browser the message shoud include the slave response
+
+![browser get master connected to slave](https://github.com/PlainConcepts/NetCore-Docker-Workshop/blob/1-start/src/Docu/1.Docker/Img/browser_get_Master_connected.PNG)
+
+### Enable name resolution for the Docker network
+
+By default when we create a container it is connected to the default network, called `bridge`. This default network does not support service discovery. To resolve the IP address by container name, we need to create a new network. The easiest way is to create the network and then when we create the containers add the parameter `--net` to select our network:
+
+```
+# create network called 'mynet'
+docker network create mynet
+
+# create the slave container connected to the new network
+docker run -d -p 5051:80 --net mynet --name slave dockerworkshop/slave:manual
+
+# create the master container connected to the new network and with the name of the slave container instead of its ip
+docker run -d -p 5050:80 -e "MasterSettings__SlaveUri=http://slave:80" --net mynet --name master1 dockerworkshop/master:manual
+```
+
