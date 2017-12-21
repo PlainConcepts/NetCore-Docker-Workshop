@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: myapp
+    component: master
+  name: master
+spec:
+  ports:
+  - port: 80
+  selector:
+    app: myapp
+    component: master
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: myapp
+    component: slave
+  name: slave
+spec:
+  ports:
+  - port: 80
+  selector:
+    app: myapp
+    component: slave
