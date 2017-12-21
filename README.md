@@ -1,6 +1,5 @@
-# KUBERNETES 
+# KUBERNETES DEPLOYMENT
 
-# Kubernetes deployment
 In this section we will create an Azure Kubernetes Service (AKS) and deploy Master and Slave containers.
 
 Requirements:
