@@ -108,9 +108,9 @@ Yo can see how we reference the addresses by the name of the service. In the cas
 ```
 You can see all the containers running with `docker ps`. Note that the ports of the services corresponds to the ones set in the override file (5000=>80 and 5001=>80). In the browser you can see the messages of Master and Slave calling the APIS:
 
-![Get master](src/Docu/2. Docker compose/img/Get_master.PNG)
+![Get master](https://raw.githubusercontent.com/PlainConcepts/NetCore-Docker-Workshop/2-dockerfiles/src/Docu/2.%20Docker%20compose/img/Get_master.PNG)
 
-![Get slave](src/Docu/2. Docker compose/img/Get_master.PNG)
+![Get slave](https://raw.githubusercontent.com/PlainConcepts/NetCore-Docker-Workshop/2-dockerfiles/src/Docu/2.%20Docker%20compose/img/Get_master.PNG)
 
 
 ## Dockerize the application using Visual Studio 2017
@@ -119,24 +119,24 @@ We have exposed until now how to introduce Docker and Docker Compose to our serv
 2. Open the 'src/All.sln' solution.
 3. Go to the Master project and right-click. Go to Add
 
-![Add Docker](./src/Docu/2. Docker compose/img/VS2017_add_docker.PNG)
+![Add Docker](https://raw.githubusercontent.com/PlainConcepts/NetCore-Docker-Workshop/2-dockerfiles/src/Docu/2.%20Docker%20compose/img/VS2017_add_docker.PNG)
 
 4. A selector will apppear to choose the OS. We choose Linux for the workshop.
 
-![VS2017_add_docker_linux](./src/Docu/2. Docker compose/img/VS2017_add_docker_linux.PNG)
+![VS2017_add_docker_linux](https://raw.githubusercontent.com/PlainConcepts/NetCore-Docker-Workshop/2-dockerfiles/src/Docu/2.%20Docker%20compose/img/VS2017_add_docker_linux.PNG)
 
 Automatically VS will add the Dockerfile files for each project:
 
-![VS2017_with_docker](./src/Docu/2. Docker compose/img/VS2017_with_docker.PNG)
+![VS2017_with_docker](https://raw.githubusercontent.com/PlainConcepts/NetCore-Docker-Workshop/2-dockerfiles/src/Docu/2.%20Docker%20compose/img/VS2017_with_docker.PNG)
 
 5. You can run the application simply building the application and clicking Play as usual with VS. You can run the application inside your container when you have as Startup project the Docker project:
 
-![docker_run](./src/Docu/2. Docker compose/img/docker_run.PNG) 
+![docker_run](https://raw.githubusercontent.com/PlainConcepts/NetCore-Docker-Workshop/2-dockerfiles/src/Docu/2.%20Docker%20compose/img/docker_run.PNG) 
 
-![docker_run2](./src/Docu/2. Docker compose/img/docker_run_2.PNG)
+![docker_run2](https://raw.githubusercontent.com/PlainConcepts/NetCore-Docker-Workshop/2-dockerfiles/src/Docu/2.%20Docker%20compose/img/docker_run_2.PNG)
 
 In case that you want to run the application without the containers, in the clasical way, you can do it setting as Startup project another project different from the Docker:
 
-![docker_run](./src/Docu/2. Docker compose/img/iis_run.PNG) 
+![docker_run](https://raw.githubusercontent.com/PlainConcepts/NetCore-Docker-Workshop/2-dockerfiles/src/Docu/2.%20Docker%20compose/img/iis_run.PNG) 
 
-![docker_run2](./src/Docu/2. Docker compose/img/iis_run_2.PNG)
+![docker_run2](https://raw.githubusercontent.com/PlainConcepts/NetCore-Docker-Workshop/2-dockerfiles/src/Docu/2.%20Docker%20compose/img/iis_run_2.PNG)
