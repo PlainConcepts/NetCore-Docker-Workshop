@@ -1,4 +1,6 @@
-# Containerized Azure AppService deployment steps
+# AppService deployment steps
+
+This section is intended to deploy our containerized applications in Azure hosting the apps to an AppService.
 
 1. Run container with AZ tools
 
