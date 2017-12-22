@@ -1,2 +1,3 @@
 # NetCore-Docker-Workshop
-FullStack Fest NetCore Docker Workshow
+
+This part is intended to build docker containers using the docker compose tools
