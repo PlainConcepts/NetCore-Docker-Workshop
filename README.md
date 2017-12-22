@@ -3,10 +3,10 @@
 In this section we will create an Azure Kubernetes Service (AKS) and deploy Master and Slave containers.
 
 Requirements:
-- Install Azure cli 2.0[Az Tools installation readme](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest) 
-- Install Kubernetes cli [Az Tools installation readme](https://kubernetes.io/docs/tasks/tools/install-kubectl/) 
+- Install Azure cli 2.0 [Az Tools installation readme](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest) 
+- Install Kubernetes cli [Kubernetes cli installation readme](https://kubernetes.io/docs/tasks/tools/install-kubectl/) 
 
-NOTE: Optionally you can skip previous steps by launching a container which already contains these tools:
+NOTE: Optionally you can skip previous steps and launch a container which already contains these tools:
 ```C#
 docker run -v ${env:UserProfile}:/k8scripts -it ramontc/k8stools
 ```
