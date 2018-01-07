@@ -34,8 +34,8 @@ Write-Host " Creating deployments.."
 kubectl create -f deployments.yaml
 
 Write-Host "Execute rollout.."
-kubectl rollout resume deployments/master
-kubectl rollout resume deployments/slave
+kubectl rollout resume deployments/master-v1
+kubectl rollout resume deployments/slave-v1
 
 Write-Host "Master API is exposed at http://$($externalDns)/master-api/, Slave API at http://$($externalDns)/slave-api/" -ForegroundColor Yellow
 

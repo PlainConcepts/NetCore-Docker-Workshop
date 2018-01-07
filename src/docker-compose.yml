@@ -2,13 +2,13 @@ version: '3'
 
 services:
   master:
-    image: ramontc/master
+    image: ramontc/master:v1
     build:
       context: ./Master
       dockerfile: Dockerfile
 
   slave:
-    image: ramontc/slave
+    image: ramontc/slave:v1
     build:
       context: ./Slave
       dockerfile: Dockerfile

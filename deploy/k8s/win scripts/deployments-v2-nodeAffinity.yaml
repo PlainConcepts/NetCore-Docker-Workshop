@@ -1,19 +1,22 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: master-v1
+  name: master-v2
 spec:
+  replicas: 3
   paused: true
   template:
     metadata:
       labels:
         app: myapp
         component: master
-        version: v1
+        version: v2
     spec:
+      nodeSelector:
+        version: v2
       containers:
       - name: master
-        image: ramontc/master:v1
+        image: ramontc/master:v2
         imagePullPolicy: Always
         env:
         - name: PATH_BASE
@@ -43,19 +46,22 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: slave-v1
+  name: slave-v2
 spec:
+  replicas: 3
   paused: true
   template:
     metadata:
       labels:
         app: myapp
         component: slave
-        version: v1
+        version: v2
     spec:
+      nodeSelector:
+        version: v2
       containers:
       - name: slave
-        image: ramontc/slave:v1
+        image: ramontc/slave:v2
         imagePullPolicy: Always
         env:
         - name: PATH_BASE
@@ -76,4 +82,3 @@ spec:
             scheme: HTTP 
           initialDelaySeconds: 60
           periodSeconds: 10   
----

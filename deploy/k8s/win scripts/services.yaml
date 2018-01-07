@@ -11,6 +11,7 @@ spec:
   selector:
     app: myapp
     component: master
+    version: v1
 ---
 apiVersion: v1
 kind: Service
@@ -25,3 +26,4 @@ spec:
   selector:
     app: myapp
     component: slave
+    version: v1
