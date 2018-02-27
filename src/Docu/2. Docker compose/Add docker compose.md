@@ -110,6 +110,25 @@ You can see all the containers running with `docker ps`. Note that the ports of 
 
 ![Get slave](./img/Get_master.PNG)
 
+### Running more than one instance of the image with docker compose
+
+You can run more than one container at the same time in a simple way adding the `--scale` option to the docker-compose up. In this example we will run 3 instances of the slave image. But first, we must put a range of the external ports to assign for that service, because we cannot run at the same time more than one container with the same external port:
+
+```
+slave:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "5001-5010:80" <-- add range of ports for more than one instance (it was "5001:80") 
+```
+
+Once removed the port we can execute the compose:
+
+```
+> docker-compose up --scale slave=3
+```
+
+We can see now 3 instances of the slave. If we call the master api we will see how it connects randomly to the 3 instances of the slave.
 
 ## Dockerize the application using Visual Studio 2017
 We have exposed until now how to introduce Docker and Docker Compose to our service manually. This is very useful since allow us to understand how the prcess works and to see how it is possible to customize every part. Nevertheless, the process can be done automatically through Visual Studio 2017 in a couple of clicks from scratch.
