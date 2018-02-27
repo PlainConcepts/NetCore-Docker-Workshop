@@ -119,7 +119,7 @@ slave:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
     ports:
-      - "5001-5010:80" <-- add range of ports for more than one instance (it was "5001:80") 
+      - "5001-5010:80" <-- add range of ports for more than one instance (it was "5001:80")  
 ```
 
 Once removed the port we can execute the compose:
