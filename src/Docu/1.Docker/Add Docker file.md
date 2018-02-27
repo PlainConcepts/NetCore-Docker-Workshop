@@ -12,7 +12,6 @@ From the [.Net web page](https://www.microsoft.com/net/)  download the .Net Core
 We will dockerize the Master application. This is under the folder `.\src\Master` of the project, *in the master branch*. Open a comand prompt under the path and do the following commands:
 
 ```
-src\Master> dotnet restore
 src\Master> dotnet build
 ```
 At this point we must ahve the dll build under the folder `bin\Debug\netcoreapp2.0`
