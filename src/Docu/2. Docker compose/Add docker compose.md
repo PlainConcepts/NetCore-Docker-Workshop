@@ -9,8 +9,6 @@ Apart of the Docker command tool, you must have the Docker compose tool installe
 ## Compiling and publishing our code
 1. Go to the `src/Master/` folder and execute:
 ```
-> dotnet restore
-> dotnet build
 > dotnet publish -c Release  -o obj/Docker/publish 
 ```
 The publish command packs the application and its dependencies into a folder for deployment. In this case the deployment content is copied to the folder `src/Master/obj/Docker/publish`. This is the place set in our Dockerfile to get the reosurces that will be copied when the Master image is created. Here the Dockerfile:
@@ -125,7 +123,7 @@ We have exposed until now how to introduce Docker and Docker Compose to our serv
 
 ![VS2017_add_docker_linux](./img/VS2017_add_docker_linux.PNG)
 
-Automatically VS will add the Dockerfile files for each project:
+Automatically VS will add the Dockerfile files for each project. Notice that the dockerfile has changed significally. Since the latest verions of Docker tools in VS2017 it is included the 'multistaging' functionality. The purspose of multistaging is to get rid of the content that is not needed in later building stages so that the final image is more lightweight:
 
 ![VS2017_with_docker](./img/VS2017_with_docker.PNG)
 
