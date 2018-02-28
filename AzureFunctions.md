@@ -20,7 +20,7 @@ In this section we will create first a Function app which will contain the follo
 npm install -g azure-functions-core-tools@core
 ```
 
-3. Fetch the Azure Functions AppSettings and store it locally
+3. Under the FunctionApp directory, execute the following command to fetch the Azure Functions AppSettings and store it locally
 
 ```C#
 az login
@@ -28,7 +28,7 @@ az login
 func azure functionapp fetch-app-settings <your_functionapp_name>
 ```
 
-4. Fetch the Azure Functions ConnectionString and store it locally
+4. Under the FunctionApp directory, execute the following command to fetch the Azure Functions ConnectionString and store it locally
 
 ```C#
 az login
