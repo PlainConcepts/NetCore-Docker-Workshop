@@ -24,21 +24,17 @@ spec:
              name: externalcfg
              key: MasterSettings__SlaveUri
         ports:
-        - containerPort: 80  
-        readinessProbe:
-          httpGet:
-            path: /hc
-            port: 80
-            scheme: HTTP 
-          initialDelaySeconds: 5
-          periodSeconds: 10 
+        - containerPort: 80
         livenessProbe:
           httpGet:
             path: /hc
             port: 80
             scheme: HTTP 
           initialDelaySeconds: 60
-          periodSeconds: 10       
+          timeoutSeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          failureThreshold: 3
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
@@ -61,18 +57,14 @@ spec:
         - name: PATH_BASE
           value: /slave-api
         ports:
-        - containerPort: 80
-        readinessProbe:
-          httpGet:
-            path: /hc
-            port: 80
-            scheme: HTTP 
-          initialDelaySeconds: 5
-          periodSeconds: 10 
+        - containerPort: 80        
         livenessProbe:
           httpGet:
             path: /hc
             port: 80
             scheme: HTTP 
           initialDelaySeconds: 60
-          periodSeconds: 10   
+          timeoutSeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          failureThreshold: 3
