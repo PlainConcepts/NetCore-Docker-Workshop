@@ -4,11 +4,12 @@ services:
   master:
     image: master
     build:
-      context: ./Master
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: Master/Dockerfile
 
   slave:
     image: slave
     build:
-      context: ./Slave
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: Slave/Dockerfile
+

@@ -45,10 +45,9 @@ namespace Slave
                 app.UseDeveloperExceptionPage();
             }
 
-            //app.UseFailingMiddleware(options =>
-            //{
-            //    options.ConfigPath = "/Failing";
-            //});
+            if (!string.IsNullOrEmpty(Configuration["PATH_BASE"])) {
+                app.UsePathBase(Configuration["PATH_BASE"]);
+            }
 
             app.UseMvc();
         }

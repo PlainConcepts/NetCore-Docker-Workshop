@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  master:
+    image: dsanztestacr.azurecr.io/master
+
+  slave:
+    image: dsanztestacr.azurecr.io/slave
+
+  integrationtests:
+    image: integrationtests
+    build:
+      context: ./IntegrationTests
+      dockerfile: Dockerfile
+    volumes:
+      - ${BUILD_ARTIFACTSTAGINGDIRECTORY:-./tests-results/}:/tests
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "80"
+    entrypoint:
+      - dotnet
+      - test
+      - --logger
+      - trx;LogFileName=/tests/test-results.xml
+

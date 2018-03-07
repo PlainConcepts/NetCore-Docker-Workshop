@@ -42,8 +42,8 @@ namespace Master.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var slaveMessage = await GetSlaveResponseSimpleResilienceCase();
-
+            var slaveMessage = await GetSlaveResponse();
+            //var slaveMessage = await GetSlaveResponseSimpleResilienceCase();
             //var slaveMessage = await GetSlaveResponseWithMyResilientHttpClient();
 
             // Triggers the azure function by posting an 
@@ -81,6 +81,27 @@ namespace Master.Controllers
 
                     return await response.Content.ReadAsStringAsync();
                 });
+            }
+        }
+
+        private async Task<string> GetSlaveResponse()
+        {
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    var response = await client.GetAsync($"{_cfg.SlaveUri}/api/identification");
+                    if (response.IsSuccessStatusCode)
+                    {
+                        return await response.Content.ReadAsStringAsync();
+                    }
+
+                    return $"Slave in {_cfg.SlaveUri} refuses to identify with {response.StatusCode}";
+                }
+            }
+            catch (Exception ex)
+            {
+                return $"Error {ex.GetType().Name} ('{ex.Message}') in slave that is in {_cfg.SlaveUri}";
             }
         }
 
