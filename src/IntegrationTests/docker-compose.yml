@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  master:
+    # image: dsanztestacr.azurecr.io/master
+    image: master
+
+  slave:
+    # image: dsanztestacr.azurecr.io/slave
+    image: slave
+
+  integrationtests:
+    image: integrationtests
+    build:
+      context: .
+      dockerfile: Dockerfile
