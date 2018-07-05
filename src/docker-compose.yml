@@ -1,4 +1,4 @@
-version: '3'
+version: '3.4'
 
 services:
   master:
@@ -13,3 +13,11 @@ services:
       context: .
       dockerfile: Slave/Dockerfile
 
+  master-tests:
+    image: master-tests
+    build:
+      context: .
+      dockerfile: Master/Dockerfile      
+      target: test
+    volumes: 
+      - ${BUILD_ARTIFACTSTAGINGDIRECTORY:-./tests-results/}:/tests

@@ -11,6 +11,10 @@ COPY . .
 WORKDIR /src/Master
 RUN dotnet build -c Release -o /app
 
+FROM build as test
+WORKDIR /src/UnitTests
+RUN dotnet test
+
 FROM build AS publish
 RUN dotnet publish -c Release -o /app
 
